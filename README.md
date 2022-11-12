@@ -9,3 +9,7 @@ Python 3.8+ ile çalışmaktadır.
  * `-j, --json` json dosyası olarak çıktı alma.
  * `-c, --color` renkli çıktı alma *Varsayılan: True*
  * `-n, --no-color` renksiz çıktı alma
+
+ ## Çalıştırmak için
+ `python main.py [args]`
+
