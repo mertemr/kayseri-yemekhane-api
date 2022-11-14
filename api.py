@@ -58,7 +58,7 @@ def get_table(soup: bs):
             formatted_text += i + "\n"
             continue
 
-        if not re.match(r"^([A-Za-zçğıöüÇĞİÖÜ]+.)+$", i):
+        if not re.match(r"^([A-Za-zçğıöüşÇĞİÖÜŞ]+.)+$", i):
             if re.match(r"^[\d]{1,2}.[\w]+.[\d]{4}.[\w]+.\([\w-]+\)", i):
                 formatted_text += i + "\n"
                 continue
@@ -85,6 +85,7 @@ def get_table(soup: bs):
         month_ids: dict = json.load(f)
 
     for _date, _ in list(yemek_verileri.items()).copy():
+        
         day, month, year, _ = _date.split()
         dt = date.fromisoformat("%s-%s-%s" % (year, month_ids.get(month), day))
         yemek_verileri[dt] = yemek_verileri.pop(_date)
@@ -95,6 +96,8 @@ def get_as_json():
     url = "https://sksd.kayseri.edu.tr/tr/i/1-2/yemek-listesi"
 
     soup = get_soup(url)
+    with open ("index.html", "w") as f:
+        f.write(soup.prettify())
     food_list = get_table(soup)
 
     return [i for i in yield_foods(food_list)]
